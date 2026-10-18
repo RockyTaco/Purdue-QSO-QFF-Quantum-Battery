@@ -1,0 +1,9 @@
+# Purdue Qiskit Fall Fest: EV Battery Challenge Dependencies
+qiskit>=1.2.0,<2.0.0
+qiskit-aer>=0.14.0
+numpy>=1.23.0,<2.0.0
+scipy>=1.10.0
+matplotlib>=3.7.0
+pandas>=2.0.0
+ipykernel>=6.25.0
+jupyterlab>=4.0.0

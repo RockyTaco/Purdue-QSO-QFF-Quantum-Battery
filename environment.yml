@@ -1,0 +1,16 @@
+name: qff-battery
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - numpy<2.0
+  - scipy
+  - matplotlib
+  - pandas
+  - jupyterlab
+  - ipykernel
+  - pip:
+      - qiskit>=1.2.0,<2.0.0
+      - qiskit-aer>=0.14.0
