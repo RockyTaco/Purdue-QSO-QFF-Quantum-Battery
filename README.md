@@ -1,14 +1,21 @@
 # 🔋 The Next-Gen Battery Race: Materials Discovery with Qiskit
 ### *Purdue Qiskit Fall Fest Hackathon Challenge*
 
-Welcome to the **Battery Materials Discovery Challenge**! In this challenge, your team will use quantum simulation to design and evaluate the materials powering the clean energy revolution—from green hydrogen fuel to next-generation electric vehicle (EV) and grid batteries.
+[![Qiskit Version](https://img.shields.io/badge/Qiskit-1.2+-6929C4.svg?style=flat-square&logo=qiskit&logoColor=white)](https://qiskit.org/)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-3776AB.svg?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![Purdue University](https://img.shields.io/badge/Purdue-Qiskit%20Fall%20Fest-CEB888.svg?style=flat-square&logoColor=black)](https://www.purdue.edu/)
+[![Open In Colab](https://img.shields.io/badge/Colab-Tutorial-F9AB00.svg?style=flat-square&logo=googlecolab&logoColor=white)](https://colab.research.google.com/github/qso-quantum/fallfest-ev-battery/blob/main/notebooks/01_tutorial_hydrogen_vqe.ipynb)
+[![Open In Colab](https://img.shields.io/badge/Colab-Submission_Notebook-F9AB00.svg?style=flat-square&logo=googlecolab&logoColor=white)](https://colab.research.google.com/github/qso-quantum/fallfest-ev-battery/blob/main/notebooks/02_challenge_submission.ipynb)
+
+Welcome to the **Battery Materials Discovery Challenge**! In this challenge, your team will use quantum simulation to design and evaluate the atomic interfaces powering the clean energy revolution—from green hydrogen fuel cells to next-generation electric vehicle (EV) and grid batteries.
 
 ---
 
 ## ⚡ The Application: Why Materials Matter
 
 Today's commercial EV batteries rely on **Lithium intercalated into Graphite ($Li-C$)**, delivering roughly $3.4\text{ to }3.7\text{ Volts}$. While reliable, this chemistry is hitting fundamental walls:
-1. **Scarcity & Cost:** Lithium mining is geographically constrained and environmentally destructive.
+
+1. **Scarcity & Cost:** Lithium extraction is geographically concentrated and environmentally destructive.
 2. **Capacity Limits:** Graphite can only hold one lithium atom for every six carbon atoms ($LiC_6$).
 3. **Safety & Degradation:** Fast charging causes metallic lithium needles ("dendrites") to grow, shorting the battery and causing fires.
 
@@ -17,7 +24,8 @@ To build the next generation of energy storage, scientists are racing to find **
 * Can a **Silicon ($Si$)** anode store $10\times$ more energy for 1,000-mile EV range?
 * Can **heteroatom-doped carbon ($N$-doped)** trap ions more securely to prevent battery fires?
 
-Because electron correlation at molecular interfaces is fundamentally quantum mechanical, classical supercomputers struggle to calculate binding energies accurately. You will use **Qiskit** and the **Variational Quantum Eigensolver (VQE)** to simulate these atomic bonds and discover what makes a superior battery!
+> [!NOTE]
+> Because electron correlation at molecular interfaces is fundamentally quantum mechanical, classical supercomputers struggle to calculate binding energies accurately. You will use **Qiskit** and the **Variational Quantum Eigensolver (VQE)** to simulate these atomic bonds and discover what makes a superior battery!
 
 ---
 
@@ -75,6 +83,7 @@ In real-world battery development, no single material is "best" at everything. *
 | **2. Cost & Raw Material Abundance** | **Sodium-Ion (`'Na-C'`)** | Replaces expensive, scarce Lithium with cheap, abundant Sodium. Drops voltage to $\sim 2.95\text{ V}$, but reduces raw cell material costs by $>80\%$ for stationary solar/wind grid storage. |
 | **3. Safety & Fire Prevention** | **Nitrogen-Doped (`'Li-N-doped'`)** | Nitrogen atoms create polar trapping sites that bind lithium tightly ($\sim 3.92\text{ V}$), preventing metallic lithium dendrites from piercing the separator. |
 
+> [!IMPORTANT]
 > **Your Part 3 Mission:** Choose an engineering objective (Voltage Maximization, Grid-Scale Cost Optimization, or Fast-Charging Safety), simulate your chosen material with VQE, and quantitatively prove why it outperforms the baseline along that dimension!
 
 ---
@@ -98,7 +107,11 @@ pip install -r requirements.txt
 ```
 
 ### Option B: Google Colab
-You can run this challenge directly in your browser! Open the notebooks in Google Colab and run:
+You can run this challenge directly in your browser:
+* 📓 **[Launch Tutorial Notebook on Colab](https://colab.research.google.com/github/qso-quantum/fallfest-ev-battery/blob/main/notebooks/01_tutorial_hydrogen_vqe.ipynb)**
+* 🚀 **[Launch Official Submission Notebook on Colab](https://colab.research.google.com/github/qso-quantum/fallfest-ev-battery/blob/main/notebooks/02_challenge_submission.ipynb)**
+
+Inside Colab, simply run:
 ```python
 !pip install qiskit>=1.2.0 qiskit-aer>=0.14.0 matplotlib numpy scipy
 ```
@@ -107,7 +120,7 @@ You can run this challenge directly in your browser! Open the notebooks in Googl
 
 ## 🎯 The Four Challenge Stages
 
-### Part 1: The Training Ground — Molecular Hydrogen ($H_2$) [25 Points]
+### Part 1: The Training Ground — Molecular Hydrogen ($H_2$) `[25 Points]`
 * **Goal:** Understand how quantum circuits find lowest-energy states (ground states).
 * **Step-by-Step Instructions:**
   1. Load the pre-packaged $H_2$ Hamiltonian across bond distances $R \in [0.4, 2.5]\text{ \AA}$ using `get_h2_hamiltonian(r)`.
@@ -115,7 +128,7 @@ You can run this challenge directly in your browser! Open the notebooks in Googl
   3. Run VQE using Qiskit's `StatevectorEstimator` with SciPy's `SLSQP` or `COBYLA` optimizer.
   4. Plot the potential energy curve, find the equilibrium bond distance $R_e \approx 0.735\text{ \AA}$, and verify chemical accuracy ($\le 1.6\text{ mHa}$) using `check_part1()`.
 
-### Part 2: The Industry Benchmark — Lithium on Carbon ($Li-C$) [35 Points]
+### Part 2: The Industry Benchmark — Lithium on Carbon ($Li-C$) `[35 Points]`
 * **Goal:** Simulate the commercial standard EV battery anode.
 * **The Physics:**
   When lithium binds into the electrode host material, energy is released:
@@ -128,7 +141,7 @@ You can run this challenge directly in your browser! Open the notebooks in Googl
   3. Compute $\Delta E_{\text{bind}}$ and $V_{\text{cell}}$ using `calculate_battery_voltage()`.
   4. Verify your baseline voltage using `check_part2()`.
 
-### Part 3: The Materials Discovery Frontier [30 Points]
+### Part 3: The Materials Discovery Frontier `[30 Points]`
 * **Goal:** Discover and evaluate an alternative battery chemistry that solves a real-world energy storage problem.
 * **Step-by-Step Instructions:**
   1. Choose a candidate chemistry from the table (`'Na-C'`, `'Li-Si'`, `'Li-N-doped'`, or a custom model).
@@ -137,7 +150,7 @@ You can run this challenge directly in your browser! Open the notebooks in Googl
   4. Generate the side-by-side **Materials Showdown Comparison** bar chart with `plot_materials_showdown()`.
   5. Fill in the Part 4 Scientific Defense table comparing your candidate against the baseline.
 
-### Part 4: Scientific Defense & Industry Pitch [10 Points]
+### Part 4: Scientific Defense & Industry Pitch `[10 Points]`
 * **Goal:** Defend your chosen battery chemistry.
 * **Questions to answer:**
   1. Which engineering dimension did you prioritize (voltage, cost, safety)?
@@ -148,15 +161,15 @@ You can run this challenge directly in your browser! Open the notebooks in Googl
 
 ## 🛠️ Troubleshooting & Pro-Tips
 
-### Tip 1: "My VQE Loop in Part 1 is Taking Too Long"
-* Set `options={'maxiter': 50, 'ftol': 1e-5}` in SciPy's `minimize`. 50 iterations is plenty for $H_2$.
-* **Pro-Tip (Warm Starting):** When looping over bond distances, pass the optimal angles from distance $i$ as the `initial_params` for distance $i+1$! Because geometry changes continuously, optimal parameters are very close to the previous point, cutting optimization time by 70%.
+> [!TIP]
+> **Pro-Tip (Warm Starting):** When looping over bond distances in Part 1, pass the optimal angles from distance $i$ as the `initial_params` for distance $i+1$! Because molecular geometry changes smoothly, optimal parameters are very close to the previous point, cutting your optimization time by **70%**.
 
-### Tip 2: "What is an Ansatz?"
-* An ansatz is a quantum circuit with tunable rotation angles $\vec{\theta}$ (like knobs on a radio). VQE turns these knobs until the circuit outputs a quantum state with the lowest possible energy expectation value.
+> [!TIP]
+> **Optimizer Settings:** Set `options={'maxiter': 50, 'ftol': 1e-5}` in SciPy's `minimize`. 50 iterations is plenty for smooth convergence and keeps your notebook snappy.
 
-### Tip 3: "Why is the Cell Voltage Negative of Binding Energy?"
-* A chemical bond forms spontaneously when energy is released ($\Delta E < 0$). In electrochemistry, by convention, battery cell voltage is defined as positive ($V = -\Delta E / e$). A binding energy of $-3.42\text{ eV}$ yields a cell voltage of $+3.42\text{ Volts}$.
+> [!NOTE]
+> **Why is the Cell Voltage Negative of Binding Energy?**
+> A chemical bond forms spontaneously when energy is released ($\Delta E < 0$). In electrochemistry, by convention, battery cell voltage is defined as positive ($V = -\Delta E / e$). A binding energy of $-3.42\text{ eV}$ yields a cell voltage of $+3.42\text{ Volts}$.
 
 ---
 
