@@ -4,8 +4,8 @@
 [![Qiskit Version](https://img.shields.io/badge/Qiskit-1.2+-6929C4.svg?style=flat-square&logo=qiskit&logoColor=white)](https://qiskit.org/)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-3776AB.svg?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![Purdue University](https://img.shields.io/badge/Purdue-Qiskit%20Fall%20Fest-CEB888.svg?style=flat-square&logoColor=black)](https://www.purdue.edu/)
-[![Open In Colab](https://img.shields.io/badge/Colab-Tutorial-F9AB00.svg?style=flat-square&logo=googlecolab&logoColor=white)](https://colab.research.google.com/github/qso-quantum/fallfest-ev-battery/blob/main/notebooks/01_tutorial_hydrogen_vqe.ipynb)
-[![Open In Colab](https://img.shields.io/badge/Colab-Submission_Notebook-F9AB00.svg?style=flat-square&logo=googlecolab&logoColor=white)](https://colab.research.google.com/github/qso-quantum/fallfest-ev-battery/blob/main/notebooks/02_challenge_submission.ipynb)
+[![Open In Colab](https://img.shields.io/badge/Colab-Tutorial-F9AB00.svg?style=flat-square&logo=googlecolab&logoColor=white)](https://colab.research.google.com/github/RockyTaco/Purdue-QSO-QFF-Quantum-Battery/blob/main/notebooks/01_tutorial_hydrogen_vqe.ipynb)
+[![Open In Colab](https://img.shields.io/badge/Colab-Submission_Notebook-F9AB00.svg?style=flat-square&logo=googlecolab&logoColor=white)](https://colab.research.google.com/github/RockyTaco/Purdue-QSO-QFF-Quantum-Battery/blob/main/notebooks/02_challenge_submission.ipynb)
 
 Welcome to the **Battery Materials Discovery Challenge**! In this challenge, your team will use quantum simulation to design and evaluate the atomic interfaces powering the clean energy revolution—from green hydrogen fuel cells to next-generation electric vehicle (EV) and grid batteries.
 
@@ -108,8 +108,8 @@ pip install -r requirements.txt
 
 ### Option B: Google Colab
 You can run this challenge directly in your browser:
-* 📓 **[Launch Tutorial Notebook on Colab](https://colab.research.google.com/github/qso-quantum/fallfest-ev-battery/blob/main/notebooks/01_tutorial_hydrogen_vqe.ipynb)**
-* 🚀 **[Launch Official Submission Notebook on Colab](https://colab.research.google.com/github/qso-quantum/fallfest-ev-battery/blob/main/notebooks/02_challenge_submission.ipynb)**
+* 📓 **[Launch Tutorial Notebook on Colab](https://colab.research.google.com/github/RockyTaco/Purdue-QSO-QFF-Quantum-Battery/blob/main/notebooks/01_tutorial_hydrogen_vqe.ipynb)**
+* 🚀 **[Launch Official Submission Notebook on Colab](https://colab.research.google.com/github/RockyTaco/Purdue-QSO-QFF-Quantum-Battery/blob/main/notebooks/02_challenge_submission.ipynb)**
 
 Inside Colab, simply run:
 ```python
