@@ -13,16 +13,16 @@ Welcome to the **Battery Materials Discovery Challenge**! In this challenge, you
 
 ## ⚡ The Application: Why Materials Matter
 
-Today's commercial EV batteries rely on **Lithium intercalated into Graphite ($Li-C$)**, delivering roughly $3.4\text{ to }3.7\text{ Volts}$. While reliable, this chemistry is hitting fundamental walls:
+Today's commercial EV batteries rely on **Lithium intercalated into Graphite (Li–C)**, delivering roughly 3.4 to 3.7 Volts. While reliable, this chemistry is hitting fundamental walls:
 
 1. **Scarcity & Cost:** Lithium extraction is geographically concentrated and environmentally destructive.
-2. **Capacity Limits:** Graphite can only hold one lithium atom for every six carbon atoms ($LiC_6$).
+2. **Capacity Limits:** Graphite can only hold one lithium atom for every six carbon atoms (LiC₆).
 3. **Safety & Degradation:** Fast charging causes metallic lithium needles ("dendrites") to grow, shorting the battery and causing fires.
 
 To build the next generation of energy storage, scientists are racing to find **alternative elements and electrode materials**:
-* Can cheap, table-salt-derived **Sodium ($Na$)** replace lithium for large-scale grid storage?
-* Can a **Silicon ($Si$)** anode store $10\times$ more energy for 1,000-mile EV range?
-* Can **heteroatom-doped carbon ($N$-doped)** trap ions more securely to prevent battery fires?
+* Can cheap, table-salt-derived **Sodium (Na)** replace lithium for large-scale grid storage?
+* Can a **Silicon (Si)** anode store 10× more energy for 1,000-mile EV range?
+* Can **heteroatom-doped carbon (N-doped)** trap ions more securely to prevent battery fires?
 
 > [!NOTE]
 > Because electron correlation at molecular interfaces is fundamentally quantum mechanical, classical supercomputers struggle to calculate binding energies accurately. You will use **Qiskit** and the **Variational Quantum Eigensolver (VQE)** to simulate these atomic bonds and discover what makes a superior battery!
@@ -87,11 +87,11 @@ To build the next generation of energy storage, scientists are racing to find **
 
 In real-world battery development, no single material is "best" at everything. **"Better" depends on your design objective:**
 
-| Engineering Dimension | Candidate Chemistry | How It Improves on the Baseline ($Li-C$) |
+| Engineering Dimension | Candidate Chemistry | How It Improves on the Baseline (Li–C) |
 | :--- | :---: | :--- |
-| **1. Maximum Cell Voltage ($V_{\text{cell}}$)** | **Silicon Anode (`'Li-Si'`)** | Delivers higher voltage ($\sim 3.78\text{ V}$) and holds up to $10\times$ more lithium atoms per gram, unlocking longer electric vehicle range. |
-| **2. Cost & Raw Material Abundance** | **Sodium-Ion (`'Na-C'`)** | Replaces expensive, scarce Lithium with cheap, abundant Sodium. Drops voltage to $\sim 2.95\text{ V}$, but reduces raw cell material costs by $>80\%$ for stationary solar/wind grid storage. |
-| **3. Safety & Fire Prevention** | **Nitrogen-Doped (`'Li-N-doped'`)** | Nitrogen atoms create polar trapping sites that bind lithium tightly ($\sim 3.92\text{ V}$), preventing metallic lithium dendrites from piercing the separator. |
+| **1. Maximum Cell Voltage (V_cell)** | **Silicon Anode (`'Li-Si'`)** | Delivers higher voltage (~3.78 V) and holds up to 10× more lithium atoms per gram, unlocking longer electric vehicle range. |
+| **2. Cost & Raw Material Abundance** | **Sodium-Ion (`'Na-C'`)** | Replaces expensive, scarce Lithium with cheap, abundant Sodium. Drops voltage to ~2.95 V, but reduces raw cell material costs by >80% for stationary solar/wind grid storage. |
+| **3. Safety & Fire Prevention** | **Nitrogen-Doped (`'Li-N-doped'`)** | Nitrogen atoms create polar trapping sites that bind lithium tightly (~3.92 V), preventing metallic lithium dendrites from piercing the separator. |
 
 > [!IMPORTANT]
 > **Your Part 3 Mission:** Choose an engineering objective (Voltage Maximization, Grid-Scale Cost Optimization, or Fast-Charging Safety), simulate your chosen material with VQE, and quantitatively prove why it outperforms the baseline along that dimension!
@@ -130,32 +130,41 @@ Inside Colab, simply run:
 
 ## 🎯 The Four Challenge Stages
 
-### Part 1: The Training Ground — Molecular Hydrogen ($H_2$) `[10 Points]`
+### Part 1: The Training Ground — Molecular Hydrogen (H₂) `[10 Points]`
 * **Goal:** Understand how quantum circuits find lowest-energy states (ground states).
 * **Step-by-Step Instructions:**
-  1. Load the pre-packaged $H_2$ Hamiltonian across bond distances $R \in [0.4, 2.5]$ Å using `get_h2_hamiltonian(r)`.
+  1. Load the pre-packaged H₂ Hamiltonian across bond distances R ∈ [0.4, 2.5] Å using `get_h2_hamiltonian(r)`.
   2. Build a parameterized ansatz (`EfficientSU2`) with 2 qubits and linear entanglement.
   3. Run VQE using Qiskit's `StatevectorEstimator` with SciPy's `SLSQP` or `COBYLA` optimizer.
-  4. Plot the potential energy curve, find the equilibrium bond distance $R_e \approx 0.735$ Å, and verify chemical accuracy ($\le 1.6\text{ mHa}$) using `check_part1()`.
+  4. Plot the potential energy curve, find the equilibrium bond distance R_e ≈ 0.735 Å, and verify chemical accuracy (≤ 1.6 mHa) using `check_part1()`.
 
-### Part 2: The Industry Benchmark — Lithium on Carbon ($Li-C$) `[20 Points]`
+### Part 2: The Industry Benchmark — Lithium on Carbon (Li–C) `[20 Points]`
 * **Goal:** Simulate the commercial standard EV battery anode.
 * **The Physics:**
   When lithium intercalates into the electrode host material, binding energy is released:
-  $$\Delta E_{\text{bind}} = E(\text{Bound Complex}) - \left[ E(\text{Host}) + E(\text{Metal}) \right]$$
+
+```math
+\Delta E_{\text{bind}} = E(\text{Bound Complex}) - \left[ E(\text{Host}) + E(\text{Metal}) \right]
+```
+
   From the thermodynamic Nernst relation ($\Delta G = -z F E_{\text{cell}}$), this binding energy directly dictates the **theoretical battery cell voltage**:
-  $$V_{\text{cell}} = -\frac{\Delta E_{\text{bind}}}{z \cdot e} \quad (\text{Industry Target for } Li-C: \approx 3.42\text{ V})$$
-  where $z$ is the ion charge valence ($z=1$ for $Li^+, Na^+, K^+$; $z=2$ for $Mg^{2+}, Ca^{2+}, Zn^{2+}$; $z=3$ for $Al^{3+}$).
+
+```math
+V_{\text{cell}} = -\frac{\Delta E_{\text{bind}}}{z \cdot e} \quad (\text{Industry Target for Li–C: } \approx 3.42\text{ V})
+```
+
+  where $z$ is the ion charge valence ($z = 1$ for Li⁺, Na⁺, K⁺; $z = 2$ for Mg²⁺, Ca²⁺, Zn²⁺; $z = 3$ for Al³⁺).
 * **Step-by-Step Instructions:**
-  1. Load the pre-packaged 4-qubit $Li-C$ Hamiltonian using `get_battery_hamiltonian('Li-C')`.
-  2. Optimize your VQE circuit to find the ground state energy $E(Li\text{-}C)$.
-  3. Compute $\Delta E_{\text{bind}}$ and $V_{\text{cell}}$ using `calculate_battery_voltage()`.
+  1. Load the pre-packaged 4-qubit Li–C Hamiltonian using `get_battery_hamiltonian('Li-C')`.
+  2. Optimize your VQE circuit to find the ground state energy E(Li–C).
+  3. Compute ΔE_bind and V_cell using `calculate_battery_voltage()`.
   4. Verify your baseline voltage using `check_part2()`.
 
 ### Part 3: Novel Materials Discovery & Custom Model Design `[45 Points]`
 * **Goal:** Design and evaluate your own alternative battery chemistry to solve a real-world energy storage problem.
 * **The Materials Discovery Pipeline (What, How, and Why):**
-  * **What to find:** The ground state energy $E_{\text{bound}}$ of your intercalated metal-electrode system. From this, compute the binding energy $\Delta E_{\text{bind}}$ and open-circuit cell voltage $V_{\text{cell}} = -\Delta E_{\text{bind}} / (z \cdot e)$.
+  * **What to find:** The ground state energy E_bound of your intercalated metal-electrode system. From this, compute the binding energy ΔE_bind and open-circuit cell voltage:
+    `V_cell = -ΔE_bind / (z · e)`
   * **How to build your model:** Use the custom builder `build_custom_battery_model(metal=..., host=..., distance_angstrom=...)` or construct your own Hamiltonian with `create_custom_hamiltonian()`:
     * **Metals:** Lithium (`'Li'`), Sodium (`'Na'`), Potassium (`'K'`), Magnesium (`'Mg'`), Calcium (`'Ca'`), Aluminum (`'Al'`), or Zinc (`'Zn'`).
     * **Hosts:** Graphite (`'Carbon'`), Silicon (`'Silicon'`), Nitrogen-Doped Carbon (`'N-doped-Carbon'`), Boron-Doped Carbon (`'B-doped-Carbon'`), or Sulfur (`'Sulfur'`).
@@ -164,7 +173,7 @@ Inside Colab, simply run:
 * **Scoring Breakdown for Part 3 (45 pts total):**
   * 🔹 **VQE Implementation & Convergence (15 pts):** Clean ansatz configuration, optimizer convergence curve, and variational ground-state energy computation.
   * 🔹 **Materials Discovery & Distance Sweep (15 pts):** Thoughtful selection of element/host pairs, exploring how lattice spacing ($r$) changes binding energy, and identifying physical trends.
-  * 🔹 **Quantitative Verification & Showdown (15 pts):** Accurate electrochemical cell voltage calculation via `check_part3()`, comparison against the $Li-C$ baseline, and generated showdown chart (`plot_materials_showdown()`).
+  * 🔹 **Quantitative Verification & Showdown (15 pts):** Accurate electrochemical cell voltage calculation via `check_part3()`, comparison against the Li–C baseline, and generated showdown chart (`plot_materials_showdown()`).
 * **Step-by-Step Instructions:**
   1. Build your custom material model using `build_custom_battery_model()`.
   2. Run VQE to find its ground state energy and calculate its new cell voltage using `check_part3()`.
@@ -179,9 +188,9 @@ Inside Colab, simply run:
   3. What is the practical trade-off of your material for real-world manufacturing and adoption?
 * **Judge Defense Q&A Guide (Sample Questions Judges Will Ask):**
   * ❓ *"Why did you choose your specific ansatz and optimizer, and how do you know your VQE didn't get trapped in a local minimum?"*
-  * ❓ *"If your candidate material delivers a higher cell voltage than Li-C, what physical or manufacturing downside did you sacrifice to achieve it?"*
-  * ❓ *"How does the bond distance $r$ affect binding energy and cell voltage, and why does over-expanding the host degrade performance?"*
-  * ❓ *"For multivalent ions like $Mg^{2+}$ or $Al^{3+}$, why is the cell voltage divided by the valence $z$, and what advantage does multivalent transfer give in volumetric capacity?"*
+  * ❓ *"If your candidate material delivers a higher cell voltage than Li–C, what physical or manufacturing downside did you sacrifice to achieve it?"*
+  * ❓ *"How does the bond distance r affect binding energy and cell voltage, and why does over-expanding the host degrade performance?"*
+  * ❓ *"For multivalent ions like Mg²⁺ or Al³⁺, why is the cell voltage divided by the valence z, and what advantage does multivalent transfer give in volumetric capacity?"*
 
 ---
 
@@ -195,7 +204,11 @@ Inside Colab, simply run:
 
 > [!NOTE]
 > **Why is the Cell Voltage Negative of Binding Energy?**
-> A chemical bond forms spontaneously when energy is released ($\Delta E < 0$). In electrochemistry, by convention, battery cell voltage is defined as positive ($V_{\text{cell}} = -\Delta E / (z \cdot e)$). A binding energy of $-3.42\text{ eV}$ with $z=1$ yields a cell voltage of $+3.42\text{ Volts}$. For multivalent ions ($Mg^{2+}, Al^{3+}$), transferring multiple electrons per atom yields higher volumetric energy density even at moderate voltages!
+> A chemical bond forms spontaneously when energy is released (ΔE < 0). In electrochemistry, by convention, battery cell voltage is defined as positive:
+>
+> **V_cell = -ΔE_bind / (z · e)**
+>
+> A binding energy of -3.42 eV with z = 1 yields a cell voltage of +3.42 Volts. For multivalent ions (Mg²⁺, Al³⁺, Zn²⁺), transferring multiple electrons per atom yields higher volumetric energy density even at moderate voltages!
 
 ---
 
@@ -203,8 +216,8 @@ Inside Colab, simply run:
 
 | Category | Points | What Judges Look For |
 | :--- | :---: | :--- |
-| **Part 1: Hydrogen PES & Chemical Accuracy** | **10 pts** | Correct equilibrium bond distance $R_e \approx 0.735$ Å, smooth PES curve, agreement with exact classical FCI within $1.6\text{ mHa}$. |
-| **Part 2: Lithium Baseline Voltage** | **20 pts** | Accurate calculation of binding energy $\Delta E_{\text{bind}}$ and cell voltage $V_{\text{cell}} \approx 3.42\text{ V}$, clean VQE optimization. |
+| **Part 1: Hydrogen PES & Chemical Accuracy** | **10 pts** | Correct equilibrium bond distance R_e ≈ 0.735 Å, smooth PES curve, agreement with exact classical FCI within 1.6 mHa. |
+| **Part 2: Lithium Baseline Voltage** | **20 pts** | Accurate calculation of binding energy ΔE_bind and cell voltage V_cell ≈ 3.42 V, clean VQE optimization. |
 | **Part 3: Novel Discovery & Quantitative Correctness** | **45 pts** | **15 pts:** VQE convergence & ansatz implementation<br>**15 pts:** Materials exploration depth & distance sweep<br>**15 pts:** Quantitative verification & showdown bar chart |
 | **Part 4: Presentation & Scientific Defense** | **25 pts** | Clear slide deck and oral defense explaining the physical trade-offs, answering judge questions with deep conceptual understanding. |
 
