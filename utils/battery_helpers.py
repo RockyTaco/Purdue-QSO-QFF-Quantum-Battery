@@ -167,6 +167,7 @@ def build_custom_battery_model(metal="Na", host="Carbon", distance_angstrom=None
     
     r_opt = metal_info["opt_dist"]
     r = float(distance_angstrom) if distance_angstrom is not None else r_opt
+    z = metal_info["valence"]
     
     # Calculate physical binding energy shift based on distance and host affinity
     delta_r = (r - r_opt)
@@ -174,7 +175,7 @@ def build_custom_battery_model(metal="Na", host="Carbon", distance_angstrom=None
     
     base_v = metal_info["base_V"] + host_info["affinity_eV"]
     target_v = max(0.5, base_v * (-dist_factor))
-    target_delta_e_ev = -target_v
+    target_delta_e_ev = -target_v * z
     target_delta_e_hartree = target_delta_e_ev / HARTREE_TO_EV
     
     e_host = host_info["E_ref"]
@@ -185,8 +186,8 @@ def build_custom_battery_model(metal="Na", host="Carbon", distance_angstrom=None
     core_const = target_e_bound + 0.8053
     paulis = [
         ("IIII", round(core_const, 4)),
-        ("ZIII",  round(0.1800 * (1.0 + 0.1 * (metal_info['valence'] - 1)), 4)),
-        ("IZII",  round(0.1800 * (1.0 + 0.1 * (metal_info['valence'] - 1)), 4)),
+        ("ZIII",  round(0.1800 * (1.0 + 0.1 * (z - 1)), 4)),
+        ("IZII",  round(0.1800 * (1.0 + 0.1 * (z - 1)), 4)),
         ("IIZI", round(-0.2400 * (1.0 + host_info['affinity_eV']), 4)),
         ("IIIZ", round(-0.2400 * (1.0 + host_info['affinity_eV']), 4)),
         ("ZZII",  0.1100),
@@ -203,6 +204,7 @@ def build_custom_battery_model(metal="Na", host="Carbon", distance_angstrom=None
         "name": f"{metal_info['name']} on {host_info['name']} (r = {r:.2f} Å)",
         "metal": metal,
         "host": host,
+        "valence": z,
         "distance_angstrom": r,
         "hamiltonian": SparsePauliOp.from_list(paulis),
         "E_host_Hartree": e_host,
@@ -212,18 +214,20 @@ def build_custom_battery_model(metal="Na", host="Carbon", distance_angstrom=None
         "application_tradeoff": f"{metal_info['description']} | Host: {host_info['tradeoff']}"
     }
 
-def create_custom_hamiltonian(pauli_list, e_host, e_metal, chemistry_name="Custom-System"):
+def create_custom_hamiltonian(pauli_list, e_host, e_metal, valence=1, chemistry_name="Custom-System"):
     """
     For teams building a Hamiltonian from scratch!
     - pauli_list: list of tuples [('IIII', -85.2), ('ZIII', 0.18), ...]
     - e_host: reference energy of host in Hartree
     - e_metal: reference energy of metal in Hartree
+    - valence: ion charge state z (1 for Li+, 2 for Mg2+, 3 for Al3+)
     """
     return {
         "chemistry": chemistry_name,
         "name": chemistry_name,
         "metal": "Custom",
         "host": "Custom",
+        "valence": int(valence),
         "distance_angstrom": 0.0,
         "hamiltonian": SparsePauliOp.from_list(pauli_list),
         "E_host_Hartree": float(e_host),
@@ -235,14 +239,16 @@ def calculate_battery_voltage(e_bound_hartree, chemistry="Li-C", model_info=None
     """
     Calculates the binding energy (Delta E) and theoretical battery cell voltage (V_cell).
     
-    Formula:
+    Thermodynamic Formula (Nernst Relation):
       Delta_E = E(Bound_Complex) - [E(Host) + E(Metal_Isolated)]
       Delta_E_eV = Delta_E * 27.2114 eV
-      V_cell = - Delta_E_eV (in Volts)
+      V_cell = - Delta_E_eV / (z * e)
+      where z is the mobile ion charge valence (Li+=1, Na+=1, Mg2+=2, Al3+=3).
     """
     if model_info is not None:
         chem_name = model_info.get("chemistry", "Custom")
         system_name = model_info.get("name", chem_name)
+        valence = model_info.get("valence", 1)
         e_host = model_info["E_host_Hartree"]
         e_metal = model_info["E_metal_Hartree"]
         target_v = model_info.get("theoretical_cell_voltage_V", None)
@@ -254,6 +260,7 @@ def calculate_battery_voltage(e_bound_hartree, chemistry="Li-C", model_info=None
         mat = benchmarks["materials"][chemistry]
         chem_name = chemistry
         system_name = mat["name"]
+        valence = mat.get("valence", 1)
         e_host = mat["E_host_Hartree"]
         e_metal = mat["E_metal_isolated_Hartree"]
         target_v = mat["theoretical_cell_voltage_V"]
@@ -261,12 +268,13 @@ def calculate_battery_voltage(e_bound_hartree, chemistry="Li-C", model_info=None
 
     delta_e_hartree = float(e_bound_hartree) - (e_host + e_metal)
     delta_e_ev = delta_e_hartree * HARTREE_TO_EV
-    v_cell = -delta_e_ev
+    v_cell = -delta_e_ev / valence
     v_error = abs(v_cell - target_v) if target_v is not None else 0.0
 
     return {
         "chemistry": chem_name,
         "name": system_name,
+        "valence": valence,
         "E_bound_Hartree": float(e_bound_hartree),
         "E_host_Hartree": e_host,
         "E_metal_Hartree": e_metal,
@@ -384,6 +392,8 @@ def check_part3(vqe_new_energy, chemistry=None, model_info=None):
     print(f"🚀 PART 3 DISCOVERY CHECK: {res['name']}")
     print("=" * 60)
     print(f"Chemistry Explored:          {res['chemistry']}")
+    if res.get('valence', 1) > 1:
+        print(f"Ion Valence (z):             {res['valence']}+ (Multivalent Transfer)")
     print(f"Binding Energy (Delta E):    {res['Delta_E_eV']:.3f} eV")
     print(f"New Battery Cell Voltage:    {res['V_cell_Volts']:.3f} V")
     if res['target_V_cell'] is not None:

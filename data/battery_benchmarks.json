@@ -11,6 +11,7 @@
     "Li-C": {
       "name": "Lithium-Graphite Anode (Industry Baseline)",
       "description": "Standard EV battery anode. Reversible intercalation into sp2 carbon.",
+      "valence": 1,
       "E_host_Hartree": -77.0712,
       "E_metal_isolated_Hartree": -7.4327,
       "E_bound_FCI_Hartree": -84.6295,
@@ -21,6 +22,7 @@
     "Na-C": {
       "name": "Sodium-Carbon Anode (Abundant Earth / Grid Storage)",
       "description": "Replaces scarce Lithium with cheap, abundant Sodium for large-scale grid storage.",
+      "valence": 1,
       "E_host_Hartree": -77.0712,
       "E_metal_isolated_Hartree": -161.8540,
       "E_bound_FCI_Hartree": -239.0336,
@@ -31,6 +33,7 @@
     "Li-Si": {
       "name": "Lithium-Silicon Alloy Anode (High-Capacity Next-Gen)",
       "description": "Silicon can bind up to 10x more lithium atoms than graphite, revolutionizing EV range.",
+      "valence": 1,
       "E_host_Hartree": -289.3240,
       "E_metal_isolated_Hartree": -7.4327,
       "E_bound_FCI_Hartree": -296.8955,
@@ -41,6 +44,7 @@
     "Li-N-doped": {
       "name": "Nitrogen-Doped Carbon Anode (Dendrite-Free Fast Charging)",
       "description": "Doping nitrogen into the carbon host alters charge distribution, trapping lithium more tightly and preventing fires.",
+      "valence": 1,
       "E_host_Hartree": -82.4110,
       "E_metal_isolated_Hartree": -7.4327,
       "E_bound_FCI_Hartree": -89.9877,
