@@ -32,43 +32,53 @@ To build the next generation of energy storage, scientists are racing to find **
 ## 🗺️ Challenge Roadmap
 
 ```
- ┌─────────────────────────────────────────────────────────────────────────────┐
- │                     THE NEXT-GEN BATTERY DISCOVERY RACE                     │
- └──────────────────────────────────────┬──────────────────────────────────────┘
-                                        │
-        ┌───────────────────────────────┴───────────────────────────────┐
-        ▼                                                               ▼
-┌──────────────────────────────────────┐  ┌──────────────────────────────────────┐
-│ PART 1: THE TRAINING GROUND (10 pts) │  │ PART 2: THE INDUSTRY BENCHMARK       │
-│ Molecular Hydrogen (H₂) PES Sweep    │  │ Lithium-Graphite (Li–C) Anode (20 pts│
-├──────────────────────────────────────┤  ├──────────────────────────────────────┤
-│ • Learn how molecules become circuits│  │ • Simulate today's standard EV anode │
-│ • Run VQE with StatevectorEstimator  │  │ • Calculate binding energy: ΔE_bind  │
-│ • Plot equilibrium bond well (0.74 Å)│  │ • Derive cell voltage: V_cell = -ΔE/e│
-│ • Achieve chemical accuracy (1.6 mHa)│  │ • Benchmark established: ~3.42 Volts │
-└──────────────────────────────────────┘  └──────────────────────────────────────┘
-                                        │
-                                        ▼
-        ┌───────────────────────────────────────────────────────────────┐
-        │ PART 3: NOVEL MATERIALS DISCOVERY (45 pts)                    │
-        │ "Can You Find a Better Chemistry? Can You Prove It?"          │
-        ├───────────────────────────────────────────────────────────────┤
-        │ Move beyond standard graphite! Test alternative elements:     │
-        │                                                               │
-        │ • 🌊 Sodium-Ion (Na–C): Abundant, ultra-cheap grid storage    │
-        │ • 💎 Silicon Anode (Li–Si): 10x capacity for extreme EV range │
-        │ • 🔥 N-Doped Carbon (Li–C_N): Enhanced binding, fire-safe     │
-        │ • 🧪 Advanced Candidate: Custom geometry / elemental model    │
-        │                                                               │
-        │ Deliverable: Run VQE on your candidate, compute the new cell  │
-        │ voltage, build a Showdown Comparison, and defend your design! │
-        └───────────────────────────────────────────────────────────────┘
-                                        │
-                                        ▼
-        ┌───────────────────────────────────────────────────────────────┐
-        │ PART 4: PRESENTATION & SCIENTIFIC DEFENSE (25 pts)            │
-        │ Present and defend your discovered material to the judges     │
-        └───────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────┐
+│                THE NEXT-GEN BATTERY DISCOVERY RACE                │
+└─────────────────────────────────┬─────────────────────────────────┘
+                                  │
+                                  ▼
+┌───────────────────────────────────────────────────────────────────┐
+│ PART 1: THE TRAINING GROUND (10 pts)                              │
+│ Molecular Hydrogen (H2) PES Sweep                                 │
+├───────────────────────────────────────────────────────────────────┤
+│ • Learn how molecular systems map to quantum circuits             │
+│ • Run VQE with Qiskit StatevectorEstimator                        │
+│ • Reconstruct potential energy curve and find Re (~0.735 Å)       │
+│ • Achieve chemical accuracy (<= 1.6 mHa) against exact FCI        │
+└─────────────────────────────────┬─────────────────────────────────┘
+                                  │
+                                  ▼
+┌───────────────────────────────────────────────────────────────────┐
+│ PART 2: THE INDUSTRY BENCHMARK (20 pts)                           │
+│ Lithium-Graphite (Li-C) Commercial Anode                          │
+├───────────────────────────────────────────────────────────────────┤
+│ • Simulate today's standard EV battery anode                      │
+│ • Calculate quantum binding energy: Delta_E_bind                  │
+│ • Derive open-circuit cell voltage: V_cell = -Delta_E / (z*e)     │
+│ • Establish industry baseline benchmark: ~3.42 Volts              │
+└─────────────────────────────────┬─────────────────────────────────┘
+                                  │
+                                  ▼
+┌───────────────────────────────────────────────────────────────────┐
+│ PART 3: NOVEL MATERIALS DISCOVERY (45 pts)                        │
+│ "Can You Find a Better Chemistry? Can You Prove It?"              │
+├───────────────────────────────────────────────────────────────────┤
+│ Move beyond standard graphite! Test alternative chemistries:      │
+│                                                                   │
+│ • Sodium-Ion (Na-C): Abundant, low-cost grid storage              │
+│ • Silicon Anode (Li-Si): 10x capacity for extended EV range       │
+│ • N-Doped Carbon (Li-C_N): Polar heteroatoms for fire safety      │
+│ • Custom Candidate: Explore metals (Mg, Ca, Al, Zn) & hosts       │
+│                                                                   │
+│ Deliverable: Run VQE on your candidate, compute the new cell      │
+│ voltage, build a Showdown Comparison, and defend your design!     │
+└─────────────────────────────────┬─────────────────────────────────┘
+                                  │
+                                  ▼
+┌───────────────────────────────────────────────────────────────────┐
+│ PART 4: PRESENTATION & SCIENTIFIC DEFENSE (25 pts)                │
+│ Pitch and defend your discovered material to the judges           │
+└───────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -205,4 +215,4 @@ Inside Colab, simply run:
 1. Click **"Use this template"** at the top of this repository to create a **Private Repository** for your team: `qff26-battery-<team_name>`.
 2. Add the hackathon judges as collaborators on GitHub.
 3. Complete all work in `notebooks/02_challenge_submission.ipynb`. Ensure all plots and outputs are visible!
-4. Submit your private repository link and presentation slides via the hackathon submission portal before the deadline.
+4. Submit your team's GitHub repository link and presentation slides via the **[Official Submission Form](https://docs.google.com/forms/d/1FU-f9O1d_PH-_pw6RZZ-6br0L8hFZjurL8LbZ7qhqQc/viewform)** before the deadline.
