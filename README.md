@@ -215,4 +215,4 @@ Inside Colab, simply run:
 1. Click **"Use this template"** at the top of this repository to create a **Private Repository** for your team: `qff26-battery-<team_name>`.
 2. Add the hackathon judges as collaborators on GitHub.
 3. Complete all work in `notebooks/02_challenge_submission.ipynb`. Ensure all plots and outputs are visible!
-4. Submit your team's GitHub repository link and presentation slides via the **[Official Submission Form](https://docs.google.com/forms/d/1FU-f9O1d_PH-_pw6RZZ-6br0L8hFZjurL8LbZ7qhqQc/viewform)** before the deadline.
+4. Submit your team's GitHub repository link and presentation slides via the **[Official Submission Form](https://forms.gle/qMA5vMGVBeEmbKMa9)** before the deadline.
