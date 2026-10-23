@@ -123,10 +123,10 @@ Inside Colab, simply run:
 ### Part 1: The Training Ground — Molecular Hydrogen ($H_2$) `[10 Points]`
 * **Goal:** Understand how quantum circuits find lowest-energy states (ground states).
 * **Step-by-Step Instructions:**
-  1. Load the pre-packaged $H_2$ Hamiltonian across bond distances $R \in [0.4, 2.5]\text{ \AA}$ using `get_h2_hamiltonian(r)`.
+  1. Load the pre-packaged $H_2$ Hamiltonian across bond distances $R \in [0.4, 2.5]$ Å using `get_h2_hamiltonian(r)`.
   2. Build a parameterized ansatz (`EfficientSU2`) with 2 qubits and linear entanglement.
   3. Run VQE using Qiskit's `StatevectorEstimator` with SciPy's `SLSQP` or `COBYLA` optimizer.
-  4. Plot the potential energy curve, find the equilibrium bond distance $R_e \approx 0.735\text{ \AA}$, and verify chemical accuracy ($\le 1.6\text{ mHa}$) using `check_part1()`.
+  4. Plot the potential energy curve, find the equilibrium bond distance $R_e \approx 0.735$ Å, and verify chemical accuracy ($\le 1.6\text{ mHa}$) using `check_part1()`.
 
 ### Part 2: The Industry Benchmark — Lithium on Carbon ($Li-C$) `[20 Points]`
 * **Goal:** Simulate the commercial standard EV battery anode.
@@ -141,14 +141,20 @@ Inside Colab, simply run:
   3. Compute $\Delta E_{\text{bind}}$ and $V_{\text{cell}}$ using `calculate_battery_voltage()`.
   4. Verify your baseline voltage using `check_part2()`.
 
-### Part 3: Novel Materials Discovery & Verification `[45 Points]`
-* **Goal:** Discover and evaluate an alternative battery chemistry that solves a real-world energy storage problem.
+### Part 3: Novel Materials Discovery & Custom Model Design `[45 Points]`
+* **Goal:** Design and evaluate your own alternative battery chemistry to solve a real-world energy storage problem.
+* **The Materials Discovery Pipeline (What, How, and Why):**
+  * **What to find:** The ground state energy $E_{\text{bound}}$ of your intercalated metal-electrode system. From this, compute the binding energy $\Delta E_{\text{bind}} = E_{\text{bound}} - [E(\text{Host}) + E(\text{Metal})]$ and open-circuit cell voltage $V_{\text{cell}} = -\Delta E_{\text{bind}} / e$.
+  * **How to build your model:** Use the custom builder `build_custom_battery_model(metal=..., host=..., distance_angstrom=...)` or construct your own Hamiltonian with `create_custom_hamiltonian()`:
+    * **Metals:** Lithium (`'Li'`), Sodium (`'Na'`), Potassium (`'K'`), Magnesium (`'Mg'`), Calcium (`'Ca'`), Aluminum (`'Al'`), or Zinc (`'Zn'`).
+    * **Hosts:** Graphite (`'Carbon'`), Silicon (`'Silicon'`), Nitrogen-Doped Carbon (`'N-doped-Carbon'`), Boron-Doped Carbon (`'B-doped-Carbon'`), or Sulfur (`'Sulfur'`).
+    * **Geometry:** Tune the interatomic binding distance in Angstroms ($r$) to observe how physical lattice expansion affects battery voltage!
+  * **Why it matters:** The strength and stability of this bond dictates energy density, safety against fires, and cost.
 * **Step-by-Step Instructions:**
-  1. Choose a candidate chemistry from the table (`'Na-C'`, `'Li-Si'`, `'Li-N-doped'`, or a custom model).
-  2. Load the Hamiltonian with `get_battery_hamiltonian(chosen_chemistry)`.
-  3. Run VQE to find its ground state energy and calculate its new cell voltage using `check_part3()`.
-  4. Generate the side-by-side **Materials Showdown Comparison** bar chart with `plot_materials_showdown()`.
-  5. Fill in the Part 4 Scientific Defense table comparing your candidate against the baseline.
+  1. Build your custom material model using `build_custom_battery_model()`.
+  2. Run VQE to find its ground state energy and calculate its new cell voltage using `check_part3()`.
+  3. Generate the side-by-side **Materials Showdown Comparison** bar chart with `plot_materials_showdown()`.
+  4. Fill in the Part 4 Scientific Defense table comparing your custom candidate against the baseline.
 
 ### Part 4: Presentation & Scientific Defense `[25 Points]`
 * **Goal:** Defend your discovered battery chemistry to the judges. With AI tools widely available, the presentation and oral defense is the ultimate test of whether your team truly understands the physics, simulation results, and practical trade-offs.
