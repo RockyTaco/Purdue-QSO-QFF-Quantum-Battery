@@ -39,8 +39,8 @@ To build the next generation of energy storage, scientists are racing to find **
         ┌───────────────────────────────┴───────────────────────────────┐
         ▼                                                               ▼
 ┌──────────────────────────────────────┐  ┌──────────────────────────────────────┐
-│ PART 1: THE TRAINING GROUND (25 pts) │  │ PART 2: THE INDUSTRY BENCHMARK       │
-│ Molecular Hydrogen (H₂) PES Sweep    │  │ Lithium-Graphite (Li–C) Anode (35 pts│
+│ PART 1: THE TRAINING GROUND (10 pts) │  │ PART 2: THE INDUSTRY BENCHMARK       │
+│ Molecular Hydrogen (H₂) PES Sweep    │  │ Lithium-Graphite (Li–C) Anode (20 pts│
 ├──────────────────────────────────────┤  ├──────────────────────────────────────┤
 │ • Learn how molecules become circuits│  │ • Simulate today's standard EV anode │
 │ • Run VQE with StatevectorEstimator  │  │ • Calculate binding energy: ΔE_bind  │
@@ -50,7 +50,7 @@ To build the next generation of energy storage, scientists are racing to find **
                                         │
                                         ▼
         ┌───────────────────────────────────────────────────────────────┐
-        │ PART 3: THE MATERIALS DISCOVERY FRONTIER (30 pts)             │
+        │ PART 3: NOVEL MATERIALS DISCOVERY (45 pts)                    │
         │ "Can You Find a Better Chemistry? Can You Prove It?"          │
         ├───────────────────────────────────────────────────────────────┤
         │ Move beyond standard graphite! Test alternative elements:     │
@@ -66,8 +66,8 @@ To build the next generation of energy storage, scientists are racing to find **
                                         │
                                         ▼
         ┌───────────────────────────────────────────────────────────────┐
-        │ PART 4: PRESENTATION & SCIENTIFIC DEFENSE (10 pts)            │
-        │ Pitch your chosen battery material to the judges in 5 minutes │
+        │ PART 4: PRESENTATION & SCIENTIFIC DEFENSE (25 pts)            │
+        │ Present and defend your discovered material to the judges     │
         └───────────────────────────────────────────────────────────────┘
 ```
 
@@ -120,7 +120,7 @@ Inside Colab, simply run:
 
 ## 🎯 The Four Challenge Stages
 
-### Part 1: The Training Ground — Molecular Hydrogen ($H_2$) `[25 Points]`
+### Part 1: The Training Ground — Molecular Hydrogen ($H_2$) `[10 Points]`
 * **Goal:** Understand how quantum circuits find lowest-energy states (ground states).
 * **Step-by-Step Instructions:**
   1. Load the pre-packaged $H_2$ Hamiltonian across bond distances $R \in [0.4, 2.5]\text{ \AA}$ using `get_h2_hamiltonian(r)`.
@@ -128,7 +128,7 @@ Inside Colab, simply run:
   3. Run VQE using Qiskit's `StatevectorEstimator` with SciPy's `SLSQP` or `COBYLA` optimizer.
   4. Plot the potential energy curve, find the equilibrium bond distance $R_e \approx 0.735\text{ \AA}$, and verify chemical accuracy ($\le 1.6\text{ mHa}$) using `check_part1()`.
 
-### Part 2: The Industry Benchmark — Lithium on Carbon ($Li-C$) `[35 Points]`
+### Part 2: The Industry Benchmark — Lithium on Carbon ($Li-C$) `[20 Points]`
 * **Goal:** Simulate the commercial standard EV battery anode.
 * **The Physics:**
   When lithium binds into the electrode host material, energy is released:
@@ -141,7 +141,7 @@ Inside Colab, simply run:
   3. Compute $\Delta E_{\text{bind}}$ and $V_{\text{cell}}$ using `calculate_battery_voltage()`.
   4. Verify your baseline voltage using `check_part2()`.
 
-### Part 3: The Materials Discovery Frontier `[30 Points]`
+### Part 3: Novel Materials Discovery & Verification `[45 Points]`
 * **Goal:** Discover and evaluate an alternative battery chemistry that solves a real-world energy storage problem.
 * **Step-by-Step Instructions:**
   1. Choose a candidate chemistry from the table (`'Na-C'`, `'Li-Si'`, `'Li-N-doped'`, or a custom model).
@@ -150,12 +150,12 @@ Inside Colab, simply run:
   4. Generate the side-by-side **Materials Showdown Comparison** bar chart with `plot_materials_showdown()`.
   5. Fill in the Part 4 Scientific Defense table comparing your candidate against the baseline.
 
-### Part 4: Scientific Defense & Industry Pitch `[10 Points]`
-* **Goal:** Defend your chosen battery chemistry.
-* **Questions to answer:**
-  1. Which engineering dimension did you prioritize (voltage, cost, safety)?
-  2. How do the quantum simulation numbers prove your hypothesis?
-  3. What is the practical trade-off of your material for real-world manufacturing?
+### Part 4: Presentation & Scientific Defense `[25 Points]`
+* **Goal:** Defend your discovered battery chemistry to the judges. With AI tools widely available, the presentation and oral defense is the ultimate test of whether your team truly understands the physics, simulation results, and practical trade-offs.
+* **What to prepare:**
+  1. Which engineering dimension did you prioritize (voltage, cost, safety), and why?
+  2. How do the quantum simulation numbers verify your hypothesis?
+  3. What is the practical trade-off of your material for real-world manufacturing and adoption?
 
 ---
 
@@ -177,10 +177,10 @@ Inside Colab, simply run:
 
 | Category | Points | What Judges Look For |
 | :--- | :---: | :--- |
-| **Part 1: Hydrogen PES & Chemical Accuracy** | **25 pts** | Correct equilibrium bond distance $R_e$, smooth PES curve, agreement with exact classical FCI within $1.6\text{ mHa}$. |
-| **Part 2: Lithium Baseline Voltage** | **35 pts** | Accurate calculation of binding energy $\Delta E_{\text{bind}}$ and cell voltage $V_{\text{cell}} \approx 3.42\text{ V}$, clean optimization. |
-| **Part 3: Materials Discovery & Proof** | **30 pts** | Successful quantum simulation of an alternative battery chemistry, quantitative comparison against baseline, and clear real-world defense. |
-| **Part 4: Presentation & Defense** | **10 pts** | Compelling explanation of why your chosen material improves on the baseline and its engineering trade-offs. |
+| **Part 1: Hydrogen PES & Chemical Accuracy** | **10 pts** | Correct equilibrium bond distance $R_e$, smooth PES curve, agreement with exact classical FCI within $1.6\text{ mHa}$. |
+| **Part 2: Lithium Baseline Voltage** | **20 pts** | Accurate calculation of binding energy $\Delta E_{\text{bind}}$ and cell voltage $V_{\text{cell}} \approx 3.42\text{ V}$, clean optimization. |
+| **Part 3: Novel Discovery & Quantitative Correctness** | **45 pts** | Successful quantum simulation of an alternative battery chemistry, correct energy convergence, and verified voltage calculations. |
+| **Part 4: Presentation & Scientific Defense** | **25 pts** | Clear slide deck and oral defense explaining the physical trade-offs, proving deep understanding of the results beyond AI assistance. |
 
 ---
 
